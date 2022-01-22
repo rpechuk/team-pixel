@@ -200,6 +200,8 @@ td, tr {
   .Canvas {
     width: 100%;
     padding: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .Canvas {

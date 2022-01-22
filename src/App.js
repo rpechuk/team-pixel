@@ -17,6 +17,7 @@ class App extends Component {
       cellColor: '#f44336',
       mouseDown: false,
       menuVisible: true
+
     };
   }
 
@@ -30,22 +31,25 @@ class App extends Component {
     });
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-
+  componentDidMount() {
     const canvas = document.querySelector("#pixel_canvas");
     canvas.innerHTML = '';
     this.setState({ background: '#fff'});
 
-    for (let x = 0; x < this.state.height; x++) {
+    for (let x = 0; x < 10; x++) {
       let row = document.createElement("tr");
       canvas.appendChild(row);
 
-      for (let y = 0; y < this.state.width; y++) {
+      for (let y = 0; y < 10; y++) {
         let cell = document.createElement("td");
         row.appendChild(cell);
       }
     }
+  }
+
+  // going to allow you to change the color
+  handleSubmit = (event) => {
+    event.preventDefault();
   }
 
   // Cell color
@@ -53,7 +57,6 @@ class App extends Component {
     this.setState({ cellColor: color.hex });
   }
 
-  // TODO: add "stamps", pre-set pixel art that can be added, e.g. stars or hearts
   handleCellColorOnClick = (event) => {
     event.target.style.backgroundColor = this.state.cellColor;
     this.setState({ mouseDown: true });
@@ -86,53 +89,60 @@ class App extends Component {
       <div className="App">
 
         <header className="App-header">
-          <h1>Pixel Art Maker</h1>
+          <h1>Pixel Team</h1>
         </header>
+
+        <div className={this.state.menuVisible ? "Canvas" : "Canvas full-width"}>
+            <h2>Design Canvas</h2>
+            <table
+              id="pixel_canvas"
+              style={{backgroundColor: this.state.background}}
+              onMouseDown={this.handleCellColorOnClick} // changes the color of the thing
+              onMouseMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
+              onMouseUp={this.handleMouseState}
+              onMouseLeave={this.handleMouseState}
+              onTouchStart={this.handleCellColorOnClick}
+              onTouchMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
+              onTouchEnd={this.handleMouseState}
+              onDoubleClick={this.handleColorRemove}>
+            </table>
+        </div>
 
         <div className="App-Content">
           {this.state.menuVisible
             ? <div className="App-Settings">
-
                 <h2>Canvas Settings</h2>
                 {/*<h3>Choose Grid Size</h3>*/}
                 <form id="sizePicker">
                   <label>
-                  <FontAwesomeIcon icon="arrows-alt-v" /> Grid Height:
+                  <FontAwesomeIcon icon="" /> X Position:
                   <input
                     type="number"
                     id="input_height"
                     name="height"
                     min="1"
-                    value={this.state.height}
+                    value={this.state.x}    // updates the y value that the person wants to change
                     onChange={this.handleChange} />
                   </label>
                   <br />
                   <label>
-                  <FontAwesomeIcon icon="arrows-alt-h" /> Grid Width:
+                  <FontAwesomeIcon icon="" /> Y Position:
                   <input
                     type="number"
                     id="input_width"
                     name="width"
                     min="1"
-                    value={this.state.width}
+                    value={this.state.y}    // updates the x value that the person wants to change
                     onChange={this.handleChange} />
                   </label>
                   <p>
                   <input
                     type="submit"
                     id="input_submit"
-                    value="Create grid"
+                    value="Paint Square"
                     onClick={this.handleSubmit} />
                   </p>
                 </form>
-
-                <hr className="Separator" />
-
-                <h3>Pick A Background Color</h3>
-                <CirclePicker
-                  onChangeComplete={this.handleBackgroundColor}
-                  color={ this.state.background }
-                />
 
                 <hr className="Separator" />
 
@@ -153,22 +163,6 @@ class App extends Component {
                 : <FontAwesomeIcon icon="angle-right" size="lg" />
               }
             </button>
-          </div>
-
-          <div className={this.state.menuVisible ? "Canvas" : "Canvas full-width"}>
-            <h2>Design Canvas</h2>
-            <table
-              id="pixel_canvas"
-              style={{backgroundColor: this.state.background}}
-              onMouseDown={this.handleCellColorOnClick}
-              onMouseMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
-              onMouseUp={this.handleMouseState}
-              onMouseLeave={this.handleMouseState}
-              onTouchStart={this.handleCellColorOnClick}
-              onTouchMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
-              onTouchEnd={this.handleMouseState}
-              onDoubleClick={this.handleColorRemove}>
-            </table>
           </div>
         </div>
 
