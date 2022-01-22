@@ -4,10 +4,15 @@ import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faArrowsAltH, faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
+import { Nav, Navbar, Modal, Form, FormControl, Button, Offcanvas, Container } from "react-bootstrap";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 library.add(faAngleLeft, faAngleRight, faArrowsAltH, faArrowsAltV);
 
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -84,15 +89,36 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
-        <header className="App-header">
-          <h1>Pixel Art Maker</h1>
-        </header>
+      <Navbar bg="dark" variant="dark" expand={false}>
+        <Container fluid>
+          <Navbar.Brand href="#">Team Pixel</Navbar.Brand>
+          <Navbar.Toggle aria-controls="offcanvasNavbar" />
+          <Navbar.Offcanvas
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+            placement="end"
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id="offcanvasNavbarLabel">Join Project</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Form className="d-flex">
+                <FormControl
+                  type="search"
+                  placeholder="ID"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <Button variant="outline-dark">Join</Button>
+              </Form>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Container>
+      </Navbar>
 
         <div className="App-Content">
           {this.state.menuVisible
             ? <div className="App-Settings">
-
                 <h2>Canvas Settings</h2>
                 {/*<h3>Choose Grid Size</h3>*/}
                 <form id="sizePicker">
