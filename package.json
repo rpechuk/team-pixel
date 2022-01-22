@@ -1,8 +1,7 @@
 {
-  "name": "react-pixel-art-maker",
+  "name": "team-pixel",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://cmikolai.github.io/react-pixel-art-maker",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
@@ -20,7 +19,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
