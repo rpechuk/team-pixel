@@ -4,7 +4,7 @@ import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faArrowsAltH, faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
-import { Nav, Navbar, Modal, Form, FormControl, Button, Offcanvas, Container } from "react-bootstrap";
+import { Nav, Navbar, Table, Form, FormControl, Button, Offcanvas, Container } from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -119,78 +119,35 @@ class App extends Component {
       </Container>
       </Navbar>
 
-        <div className={this.state.menuVisible ? "Canvas" : "Canvas full-width"}>
-            <h2>Design Canvas</h2>
-            <table
-              id="pixel_canvas"
-              style={{backgroundColor: this.state.background}}
-              onMouseDown={this.handleCellColorOnClick} // changes the color of the thing
-              onMouseMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
-              onMouseUp={this.handleMouseState}
-              onMouseLeave={this.handleMouseState}
-              onTouchStart={this.handleCellColorOnClick}
-              onTouchMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
-              onTouchEnd={this.handleMouseState}
-              onDoubleClick={this.handleColorRemove}>
-            </table>
-        </div>
-
         <div className="App-Content">
+          <div className={this.state.menuVisible ? "Canvas" : "Canvas full-width"}>
+              <h2>Design Canvas</h2>
+              <table
+                id="pixel_canvas"
+                style={{backgroundColor: this.state.background}}
+                onMouseDown={this.handleCellColorOnClick} // changes the color of the thing
+                onMouseMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
+                onMouseUp={this.handleMouseState}
+                onMouseLeave={this.handleMouseState}
+                onTouchStart={this.handleCellColorOnClick}
+                onTouchMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
+                onTouchEnd={this.handleMouseState}
+                onDoubleClick={this.handleColorRemove}>
+              </table>
+          </div>
           {this.state.menuVisible
             ? <div className="App-Settings">
-                <h2>Canvas Settings</h2>
-                {/*<h3>Choose Grid Size</h3>*/}
-                <form id="sizePicker">
-                  <label>
-                  <FontAwesomeIcon icon="" /> X Position:
-                  <input
-                    type="number"
-                    id="input_height"
-                    name="height"
-                    min="1"
-                    value={this.state.x}    // updates the y value that the person wants to change
-                    onChange={this.handleChange} />
-                  </label>
-                  <br />
-                  <label>
-                  <FontAwesomeIcon icon="" /> Y Position:
-                  <input
-                    type="number"
-                    id="input_width"
-                    name="width"
-                    min="1"
-                    value={this.state.y}    // updates the x value that the person wants to change
-                    onChange={this.handleChange} />
-                  </label>
-                  <p>
-                  <input
-                    type="submit"
-                    id="input_submit"
-                    value="Paint Square"
-                    onClick={this.handleSubmit} />
-                  </p>
-                </form>
-
                 <hr className="Separator" />
-
                 <h3>Pick A Color</h3>
                 <CirclePicker
                   onChangeComplete={this.handleCellColor}
                   color={ this.state.cellColor }
                 />
                 <p>Hint: Double click to remove a color</p>
+                <hr className="Separator" />
               </div>
             : null
           }
-
-          <div className={this.state.menuVisible ? "mobile-menu menu-open" : "mobile-menu menu-closed"}>
-            <button className="show-settings" onClick={this.mobileMenu}>
-              {this.state.menuVisible
-                ? <FontAwesomeIcon icon="angle-left" size="lg" />
-                : <FontAwesomeIcon icon="angle-right" size="lg" />
-              }
-            </button>
-          </div>
         </div>
 
       </div>

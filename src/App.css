@@ -27,6 +27,7 @@ appearance: none;
 }
 
 .App-Content {
+  margin-top: 15px;
   display: flex;
   flex-direction: row;
   color: var(--main-text-color);
@@ -171,12 +172,13 @@ label {
 
 table {
   border-spacing: 0;
+  margin: auto;
 }
 
 td, tr {
   width: 20px;
   height: 20px;
-  border: 1px solid #282c34;
+  border: 1px solid #282c34 !important;
 }
 
 /* MOBILE STYLES */
