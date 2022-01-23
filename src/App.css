@@ -15,17 +15,6 @@ appearance: none;
   text-align: center;
 }
 
-.App-header {
-  background-color: var(--main-color);
-  min-height: 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-Content {
   margin-top: 15px;
   display: flex;
@@ -38,13 +27,22 @@ appearance: none;
 }
 
 .App-Settings {
-  width: 40%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   max-width: 350px;
   padding-left: 15px;
   padding-bottom: 20px;
   padding-right: 20px;
   font-size: calc(10px + 1vmin);
   /* border-right: 1px solid var(--main-color); */
+}
+
+.menu-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .mobile-menu {
@@ -137,13 +135,23 @@ label {
 }
 
 .Canvas {
+  display: flex;
+  flex-direction: column;
   min-width: 60%;
   max-width: 100%;
   text-align: center;
   font-size: calc(10px + 1vmin);
 }
 
+.pixel_canvas {
+  margin-top: 10px;
+  min-width: 70%;
+  aspect-ratio: 1 / 1;
+}
+
 .Canvas.full-width {
+  min-width: 80%;
+  aspect-ratio: 1 / 1;
   min-width: unset;
   width: 100%;
   margin: 0 50px;
@@ -153,21 +161,14 @@ label {
   margin: 0 auto !important;
 }
 
-#sizePicker label {
-  display: block;
-  width: 210px;
-  margin: 0 auto;
-}
-
-#sizePicker svg {
-  width: 14.33px;
-  margin-right: 3px;
-}
-
 .Separator {
   max-width: 90%;
   margin: 20px auto;
   border-color: var(--main-color);
+}
+
+.art-title {
+  margin-bottom: 20px;
 }
 
 table {

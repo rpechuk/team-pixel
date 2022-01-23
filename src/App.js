@@ -5,9 +5,23 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faArrowsAltH, faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
 import { Nav, Navbar, Table, Form, FormControl, Button, Offcanvas, Container } from "react-bootstrap";
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const renderTime = ({ remainingTime }) => {
+  if (remainingTime === 0) {
+    return <div className="timer">Too late...</div>;
+  }
+
+  return (
+    <div className="timer">
+      <div className="text">Remaining</div>
+      <div className="value">{remainingTime}</div>
+      <div className="text">seconds</div>
+    </div>
+  );
+};
 
 library.add(faAngleLeft, faAngleRight, faArrowsAltH, faArrowsAltV);
 
@@ -121,9 +135,10 @@ class App extends Component {
 
         <div className="App-Content">
           <div className={this.state.menuVisible ? "Canvas" : "Canvas full-width"}>
-              <h2>Design Canvas</h2>
+              <h1>Design Canvas</h1>
               <table
                 id="pixel_canvas"
+                className="pixel_canvas"
                 style={{backgroundColor: this.state.background}}
                 onMouseDown={this.handleCellColorOnClick} // changes the color of the thing
                 onMouseMove={this.state.mouseDown ? this.handleCellColorOnClick : null}
@@ -135,21 +150,34 @@ class App extends Component {
                 onDoubleClick={this.handleColorRemove}>
               </table>
           </div>
-          {this.state.menuVisible
-            ? <div className="App-Settings">
-                <hr className="Separator" />
-                <h3>Pick A Color</h3>
-                <CirclePicker
-                  onChangeComplete={this.handleCellColor}
-                  color={ this.state.cellColor }
-                />
-                <p>Hint: Double click to remove a color</p>
-                <hr className="Separator" />
-              </div>
-            : null
-          }
+          <div className="menu-wrapper">
+            <h1 className="art-title">Title here</h1>
+            <div className="timer-wrapper">
+              <CountdownCircleTimer
+                isPlaying
+                duration={60}
+                colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+                colorsTime={[60, 45, 30, 0]}
+                onComplete={() => ({ shouldRepeat: true, delay: 60 })}
+              >
+                {renderTime}
+              </CountdownCircleTimer>
+            </div>
+            {this.state.menuVisible
+              ? <div className="App-Settings">
+                  <hr className="Separator" />
+                  <h3>Pick A Color</h3>
+                  <CirclePicker
+                    onChangeComplete={this.handleCellColor}
+                    color={ this.state.cellColor }
+                  />
+                  <p>Hint: Double click to remove a color</p>
+                  <hr className="Separator" />
+                </div>
+              : null
+            }
+          </div>
         </div>
-
       </div>
     );
   }
